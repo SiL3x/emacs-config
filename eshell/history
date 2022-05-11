@@ -1,0 +1,11 @@
+ls
+./build-deploy.sh
+./build-deploy.sh
+clear
+cd ..
+ls
+cd sa-east-1/
+ls
+sh build-deploy.sh
+./build-deploy.sh
+lsXoXF
