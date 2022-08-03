@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/dev/projects/link-delivery/" "~/dev/projects/logging-api/" "~/dev/projects/db-replica/" "~/dev/projects/infrastructure/" "~/dev/projects/test-github-ci-go/" "~/dev/projects/pauline/cpp_intro/" "~/dev/projects/training/go/api-test/")
+("~/dev/projects/infrastructure/" "~/.emacs.d/" "~/dev/projects/database-model/" "~/dev/projects/link-delivery/" "~/dev/projects/logging-api/" "~/dev/projects/db-replica/" "~/dev/projects/test-github-ci-go/" "~/dev/projects/pauline/cpp_intro/" "~/dev/projects/training/go/api-test/")

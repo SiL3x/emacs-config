@@ -1,0 +1,2 @@
+;;; Generated package description from ansible-doc.el  -*- no-byte-compile: t -*-
+(define-package "ansible-doc" "0.4" "Ansible documentation Minor Mode" '((emacs "24.3")) :commit "bc8128a85a79b14f4a121105d87a5eddc33975ad" :authors '(("Sebastian Wiesner" . "swiesner@lunaryorn")) :maintainer '("Sebastian Wiesner" . "swiesner@lunaryorn") :keywords '("tools" "help") :url "https://github.com/lunaryorn/ansible-doc.el")

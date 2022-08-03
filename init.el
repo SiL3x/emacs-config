@@ -24,7 +24,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(wheatgrass))
  '(package-selected-packages
-   '(grip-mode use-package markdown-mode ag multiple-cursors dockerfile-mode web-beautify json-mode rainbow-delimiters slime-volleyball flycheck-gometalinter company-go ivy magit projectile go-mode php-mode company-terraform terraform-doc terraform-mode)))
+   '(poly-ansible grip-mode use-package markdown-mode ag multiple-cursors dockerfile-mode web-beautify json-mode rainbow-delimiters slime-volleyball flycheck-gometalinter company-go ivy magit projectile go-mode php-mode company-terraform terraform-doc terraform-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -120,9 +120,6 @@
              (lambda ()
                (add-hook 'before-save-hook 'web-beautify-css-buffer t t))))
 
-;; Settings for multiple cursors
-(global-set-key (kbd "C-c m c") 'mc/edit-lines)
-
 ;; Enable Org mode
 (require 'org)
 ;; Settings for org mode
@@ -148,3 +145,13 @@
 ;; This requires GNU/Emacs version >= 26 and built with the `--with-xwidgets`
 ;; option.
 (setq grip-preview-use-webkit t)
+
+;; Set User-Shortcuts
+;;   Settings for multiple cursors
+(global-set-key (kbd "C-c m c") 'mc/edit-lines)
+
+;;   Setting for auto-indent
+(global-set-key (kbd "C-c h") 'indent-region)
+
+;;   Setting for ag-projectile
+(global-set-key (kbd "C-c v") 'ag-project)
