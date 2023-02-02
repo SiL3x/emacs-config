@@ -1,0 +1,764 @@
+This is docKUalik.info, produced by makeinfo version 6.7 from
+ement.texi.
+
+INFO-DIR-SECTION Emacs
+START-INFO-DIR-ENTRY
+* Ement: (ement).       Matrix client for Emacs.
+END-INFO-DIR-ENTRY
+
+
+File: docKUalik.info,  Node: Top,  Next: Installation,  Up: (dir)
+
+Ement.el
+********
+
+https://elpa.gnu.org/packages/ement.svg
+(https://elpa.gnu.org/packages/ement.html)
+
+   Ement.el is a Matrix client for Emacs.  It aims to be simple, fast,
+featureful, and reliable.
+
+   Feel free to join us in the chat room:
+https://img.shields.io/matrix/ement.el:matrix.org.svg?label=%23ement.el:matrix.org
+(https://matrix.to/#/#ement.el:matrix.org)
+
+* Menu:
+
+* Installation::
+* Usage::
+* Rationale::
+* Changelog::
+* Development::
+* License::
+
+— The Detailed Node Listing —
+
+Installation
+
+* GNU ELPA::
+* GNU Guix::
+* Debian::
+* Git master::
+* Manual::
+
+Usage
+
+* Bindings::
+* Tips::
+* Encrypted room support through Pantalaimon::
+
+Bindings
+
+* Room buffers::
+* Room list buffer::
+* Directory buffers::
+* Mentions/notifications buffers::
+
+Tips
+
+* Displaying symbols and emojis::
+
+Changelog
+
+* 0.4.1: 041.
+* 0.4: 04.
+* 0.3.1: 031.
+* 0.3: 03.
+* 0.2.1: 021.
+* 0.2: 02.
+* 0.1.4: 014.
+* 0.1.3: 013.
+* 0.1.2: 012.
+* 0.1.1: 011.
+* 0.1: 01.
+
+Development
+
+* Copyright Assignment::
+* Matrix spec in Org format::
+
+
+
+File: docKUalik.info,  Node: Installation,  Next: Usage,  Prev: Top,  Up: Top
+
+1 Installation
+**************
+
+* Menu:
+
+* GNU ELPA::
+* GNU Guix::
+* Debian::
+* Git master::
+* Manual::
+
+
+File: docKUalik.info,  Node: GNU ELPA,  Next: GNU Guix,  Up: Installation
+
+1.1 GNU ELPA
+============
+
+Ement.el is published in GNU ELPA (http://elpa.gnu.org/), so it may be
+installed in Emacs with the command ‘M-x package-install RET ement RET’.
+This is the recommended way to install Ement.el, as it will install the
+current stable release.
+
+
+File: docKUalik.info,  Node: GNU Guix,  Next: Debian,  Prev: GNU ELPA,  Up: Installation
+
+1.2 GNU Guix
+============
+
+Ement.el is also available in GNU Guix (https://guix.gnu.org/) as
+‘emacs-ement’.
+
+
+File: docKUalik.info,  Node: Debian,  Next: Git master,  Prev: GNU Guix,  Up: Installation
+
+1.3 Debian
+==========
+
+Ement.el is also available in Debian as elpa-ement
+(https://packages.debian.org/elpa-ement).
+
+
+File: docKUalik.info,  Node: Git master,  Next: Manual,  Prev: Debian,  Up: Installation
+
+1.4 Git master
+==============
+
+The ‘master’ branch of the Git repository is intended to be usable at
+all times; only minor bugs are expected to be found in it before a new
+stable release is made.  To install from this, it is recommended to use
+quelpa-use-package (https://github.com/quelpa/quelpa-use-package), like
+this:
+
+     ;; Install and load `quelpa-use-package'.
+     (package-install 'quelpa-use-package)
+     (require 'quelpa-use-package)
+
+     ;; Install Ement.
+     (use-package ement
+       :quelpa (ement :fetcher github :repo "alphapapa/ement.el"))
+
+   One might also use systems like Straight
+(https://github.com/radian-software/straight.el) (which is also used by
+DOOM (https://github.com/doomemacs/doomemacs)) to install from Git, but
+the author cannot offer support for them.
+
+
+File: docKUalik.info,  Node: Manual,  Prev: Git master,  Up: Installation
+
+1.5 Manual
+==========
+
+Ement.el is intended to be installed with Emacs’s package system, which
+will ensure that the required autoloads are generated, etc.  If you
+choose to install it manually, you’re on your own.
+
+
+File: docKUalik.info,  Node: Usage,  Next: Rationale,  Prev: Installation,  Up: Top
+
+2 Usage
+*******
+
+   • • • 
+  1. Call command ‘ement-connect’ to connect.  Multiple sessions are
+     supported, so you may call the command again to connect to another
+     account.
+  2. Wait for initial sync to complete (which can take a few
+     moments–initial sync JSON requests can be large).
+  3. Use these commands:
+        • ‘ement-list-rooms’ to view the list of joined rooms.
+        • ‘ement-view-room’ to view a room’s buffer, selected with
+          completion.
+        • ‘ement-create-room’ to create a new room.
+        • ‘ement-invite-user’ to invite a user to a room.
+        • ‘ement-join-room’ to join a room.
+        • ‘ement-leave-room’ to leave a room.
+        • ‘ement-forget-room’ to forget a room.
+        • ‘ement-tag-room’ to add (or with interactive prefix, remove) a
+          tag on a room (including favorite/low-priority status).
+        • ‘ement-list-members’ to list members in a room.
+        • ‘ement-send-direct-message’ to send a direct message to a user
+          (in an existing direct room, or creating a new one
+          automatically).
+        • ‘ement-room-edit-message’ to edit a message at point.
+        • ‘ement-room-send-file’ to send a file.
+        • ‘ement-room-send-image’ to send an image.
+        • ‘ement-room-set-topic’ to set a room’s topic.
+        • ‘ement-room-occur’ to search in a room’s known events.
+        • ‘ement-ignore-user’ to ignore a user (or with interactive
+          prefix, un-ignore).
+        • ‘ement-room-set-message-format’ to set a room’s message format
+          buffer-locally.
+        • ‘ement-directory’ to view a room directory.
+        • ‘ement-directory-search’ to search a room directory.
+  4. Use these special buffers to see events from multiple rooms (you
+     can also reply to messages from these buffers!):
+        • See all new events that mention you in the ‘*Ement Mentions*’
+          buffer.
+        • See all new events in rooms that have open buffers in the
+          ‘*Ement Notifications*’ buffer.
+
+* Menu:
+
+* Bindings::
+* Tips::
+* Encrypted room support through Pantalaimon::
+
+
+File: docKUalik.info,  Node: Bindings,  Next: Tips,  Up: Usage
+
+2.1 Bindings
+============
+
+These bindings are common to all of the following buffer types:
+
+   • Switch to a room buffer: ‘M-g M-r’
+   • Switch to the room list buffer: ‘M-g M-l’
+   • Switch to the mentions buffer: ‘M-g M-m’
+   • Switch to the notifications buffer: ‘M-g M-n’
+
+* Menu:
+
+* Room buffers::
+* Room list buffer::
+* Directory buffers::
+* Mentions/notifications buffers::
+
+
+File: docKUalik.info,  Node: Room buffers,  Next: Room list buffer,  Up: Bindings
+
+2.1.1 Room buffers
+------------------
+
+   • Show command menu: ‘?’
+
+   *Movement*
+
+   • Next event: ‘TAB’
+   • Previous event: ‘<backtab>’
+   • Scroll up and mark read: ‘SPC’
+   • Scroll down: ‘S-SPC’
+   • Jump to fully-read marker: ‘M-SPC’
+   • Load older messages: at top of buffer, scroll contents up (i.e.
+     ‘S-SPC’, ‘M-v’ or ‘mwheel-scroll’)
+
+   *Switching*
+
+   • List rooms: ‘M-g M-l’
+   • Switch to other room: ‘M-g M-r’
+   • Switch to mentions buffer: ‘M-g M-m’
+   • Switch to notifications buffer: ‘M-g M-n’
+   • Quit window: ‘q’
+
+   *Messages*
+
+   • Write message: ‘RET’
+   • Write reply to event at point (when region is active, only quote
+     marked text) : ‘S-RET’
+   • Compose message in buffer: ‘M-RET’ (while writing in minibuffer:
+     ‘C-c ')’ (Use command ‘ement-room-compose-org’ to activate Org mode
+     in the compose buffer.)
+   • Edit message: ‘<insert>’
+   • Delete message: ‘C-k’
+   • Send reaction to event at point, or send same reaction at point: ‘s
+     r’
+   • Send emote: ‘s e’
+   • Send file: ‘s f’
+   • Send image: ‘s i’
+   • View event source: ‘v’
+   • Complete members and rooms at point: ‘C-M-i’ (standard
+     ‘completion-at-point’ command).
+
+   *Images*
+
+   • Toggle scale of image (between fit-to-window and thumbnail):
+     ‘mouse-1’
+   • Show image in new buffer at full size: ‘double-mouse-1’
+
+   *Users*
+
+   • Send direct message: ‘u RET’
+   • Invite user: ‘u i’
+   • Ignore user: ‘u I’
+
+   *Room*
+
+   • Occur search in room: ‘M-s o’
+   • List members: ‘r m’
+   • Set topic: ‘r t’
+   • Set message format: ‘r f’
+   • Set notification rules: ‘r n’
+   • Tag/untag room: ‘r T’
+
+   *Room membership*
+
+   • Create room: ‘R c’
+   • Join room: ‘R j’
+   • Leave room: ‘R l’
+   • Forget room: ‘R F’
+
+   *Other*
+
+   • Sync new messages (not necessary if auto sync is enabled; with
+     prefix to force new sync): ‘g’
+
+
+File: docKUalik.info,  Node: Room list buffer,  Next: Directory buffers,  Prev: Room buffers,  Up: Bindings
+
+2.1.2 Room list buffer
+----------------------
+
+   • Show buffer of room at point: ‘RET’
+   • Show buffer of next unread room: ‘SPC’
+   • Move between room names: ‘TAB’ / ‘<backtab>’
+
+
+File: docKUalik.info,  Node: Directory buffers,  Next: Mentions/notifications buffers,  Prev: Room list buffer,  Up: Bindings
+
+2.1.3 Directory buffers
+-----------------------
+
+   • View/join a room: ‘RET’ / ‘mouse-1’
+   • Load next batch of rooms: ‘+’
+
+
+File: docKUalik.info,  Node: Mentions/notifications buffers,  Prev: Directory buffers,  Up: Bindings
+
+2.1.4 Mentions/notifications buffers
+------------------------------------
+
+   • Move between events: ‘TAB’ / ‘<backtab>’
+   • Go to event at point in its room buffer: ‘RET’
+   • Write reply to event at point (shows the event in its room while
+     writing) : ‘S-RET’
+
+
+File: docKUalik.info,  Node: Tips,  Next: Encrypted room support through Pantalaimon,  Prev: Bindings,  Up: Usage
+
+2.2 Tips
+========
+
+   • Desktop notifications are enabled by default for events that
+     mention the local user.  They can also be shown for all events in
+     rooms with open buffers.
+   • Send messages in Org mode format by customizing the option
+     ‘ement-room-send-message-filter’ (which enables Org format by
+     default), or by calling ‘ement-room-compose-org’ in a compose
+     buffer (which enables it for a single message).  Then Org-formatted
+     messages are automatically converted and sent as HTML-formatted
+     messages (with the Org syntax as the plain-text fallback).  You can
+     send syntax such as:
+        • Bold, italic, underline, strikethrough
+        • Links
+        • Tables
+        • Source blocks (including results with ‘:exports both’)
+        • Footnotes (okay, that might be pushing it, but you can!)
+        • And, generally, anything that Org can export to HTML
+   • Starting in the room list buffer, by pressing ‘SPC’ repeatedly, you
+     can cycle through and read all rooms with unread buffers.  (If a
+     room doesn’t have a buffer, it will not be included.)
+   • Room buffers and the room-list buffer can be bookmarked in Emacs,
+     i.e.  using ‘C-x r m’.  This is especially useful with Burly
+     (https://github.com/alphapapa/burly.el): you can arrange an Emacs
+     frame with several room buffers displayed at once, use
+     ‘burly-bookmark-windows’ to bookmark the layout, and then you can
+     restore that layout and all of the room buffers by opening the
+     bookmark, rather than having to manually arrange them every time
+     you start Emacs or change the window configuration.
+   • Images and other files can be uploaded to rooms using
+     drag-and-drop.
+   • You can customize settings in the ‘ement’ group.
+        • *Note:* ‘setq’ should not be used for certain options, because
+          it will not call the associated setter function.  Users who
+          have an aversion to the customization system may experience
+          problems.
+
+* Menu:
+
+* Displaying symbols and emojis::
+
+
+File: docKUalik.info,  Node: Displaying symbols and emojis,  Up: Tips
+
+2.2.1 Displaying symbols and emojis
+-----------------------------------
+
+Emacs may not display certain symbols and emojis well by default.  Based
+on this question and answer
+(https://emacs.stackexchange.com/questions/62049/override-the-default-font-for-emoji-characters),
+you may find that the simplest way to fix this is to install an
+appropriate font, like Noto Emoji
+(https://www.google.com/get/noto/#emoji-zsye), and then use this Elisp
+code:
+
+     (setf use-default-font-for-symbols nil)
+     (set-fontset-font t 'unicode "Noto Emoji" nil 'append)
+
+
+File: docKUalik.info,  Node: Encrypted room support through Pantalaimon,  Prev: Tips,  Up: Usage
+
+2.3 Encrypted room support through Pantalaimon
+==============================================
+
+Ement.el doesn’t support encrypted rooms natively, but it can be used
+transparently with the E2EE-aware reverse proxy daemon Pantalaimon
+(https://github.com/matrix-org/pantalaimon/).  After configuring it
+according to its documentation, call ‘ement-connect’ with the
+appropriate hostname and port, like:
+
+     (ement-connect :uri-prefix "http://localhost:8009")
+
+
+File: docKUalik.info,  Node: Rationale,  Next: Changelog,  Prev: Usage,  Up: Top
+
+3 Rationale
+***********
+
+Why write a new Emacs Matrix client when there is already
+matrix-client.el (https://github.com/alphapapa/matrix-client.el), by the
+same author, no less?  A few reasons:
+
+   • ‘matrix-client’ uses an older version of the Matrix spec, r0.3.0,
+     with a few elements of r0.4.0 grafted in.  Bringing it up to date
+     with the current version of the spec, r0.6.1, would be more work
+     than to begin with the current version.  Ement.el targets r0.6.1
+     from the beginning.
+   • ‘matrix-client’ does not use Matrix’s lazy-loading feature (which
+     was added to the specification later), so initial sync requests can
+     take a long time for the server to process and can be large
+     (sometimes tens of megabytes of JSON for the client to process!).
+     Ement.el uses lazy-loading, which significantly improves
+     performance.
+   • ‘matrix-client’ automatically makes buffers for every room a user
+     has joined, even if the user doesn’t currently want to watch a
+     room.  Ement.el opens room buffers on-demand, improving performance
+     by not having to insert events into buffers for rooms the user
+     isn’t watching.
+   • ‘matrix-client’ was developed without the intention of publishing
+     it to, e.g.  MELPA or ELPA.  It has several dependencies, and its
+     code does not always install or compile cleanly due to
+     macro-expansion issues (apparently depending on the user’s Emacs
+     config).  Ement.el is designed to have minimal dependencies outside
+     of Emacs (currently only one, ‘plz’, which could be imported into
+     the project), and every file is linted and compiles cleanly using
+     makem.sh (https://github.com/alphapapa/makem.sh).
+   • ‘matrix-client’ uses EIEIO, probably unnecessarily, since few, if
+     any, of the benefits of EIEIO are realized in it.  Ement.el uses
+     structs instead.
+   • ‘matrix-client’ uses bespoke code for inserting messages into
+     buffers, which works pretty well, but has a few minor bugs which
+     are difficult to track down.  Ement.el uses Emacs’s built-in (and
+     perhaps little-known) ‘ewoc’ library, which makes it much simpler
+     and more reliable to insert and update messages in buffers, and
+     enables the development of advanced UI features more easily.
+   • ‘matrix-client’ was, to a certain extent, designed to imitate other
+     messaging apps.  The result is, at least when used with the
+     ‘matrix-client-frame’ command, fairly pleasing to use, but isn’t
+     especially "Emacsy."  Ement.el is intended to better fit into
+     Emacs’s paradigms.
+   • ‘matrix-client’’s long name makes for long symbol names, which
+     makes for tedious, verbose code.  ‘ement’ is easy to type and makes
+     for concise, readable code.
+   • The author has learned much since writing ‘matrix-client’ and hopes
+     to write simpler, more readable, more maintainable code in
+     Ement.el.  It’s hoped that this will enable others to contribute
+     more easily.
+
+   Note that, while ‘matrix-client’ remains usable, and probably will
+for some time to come, Ement.el has now surpassed it in every way.  The
+only reason to choose ‘matrix-client’ instead is if one is using an
+older version of Emacs that isn’t supported by Ement.el.
+
+
+File: docKUalik.info,  Node: Changelog,  Next: Development,  Prev: Rationale,  Up: Top
+
+4 Changelog
+***********
+
+* Menu:
+
+* 0.4.1: 041.
+* 0.4: 04.
+* 0.3.1: 031.
+* 0.3: 03.
+* 0.2.1: 021.
+* 0.2: 02.
+* 0.1.4: 014.
+* 0.1.3: 013.
+* 0.1.2: 012.
+* 0.1.1: 011.
+* 0.1: 01.
+
+
+File: docKUalik.info,  Node: 041,  Next: 04,  Up: Changelog
+
+4.1 0.4.1
+=========
+
+*Fixes*
+   • Don’t show "curl process interrupted" message when updating a read
+     marker’s position again.
+
+
+File: docKUalik.info,  Node: 04,  Next: 031,  Prev: 041,  Up: Changelog
+
+4.2 0.4
+=======
+
+*Additions*
+   • Option ‘ement-room-unread-only-counts-notifications’, now enabled
+     by default, causes rooms’ unread status to be determined only by
+     their notification counts (which are set by the server and depend
+     on rooms’ notification settings).
+   • Command ‘ement-room-set-notification-state’ sets a room’s
+     notification state (imitating Element’s user-friendly presets).
+   • Room buffers’ Transient menus show the room’s notification state
+     (imitating Element’s user-friendly presets).
+   • Command ‘ement-set-display-name’ sets the user’s global
+     displayname.
+   • Command ‘ement-room-set-display-name’ sets the user’s displayname
+     in a room (which is also now displayed in the room’s Transient
+     menu).
+   • Column ‘Notifications’ in the ‘ement-taxy-room-list’ buffer shows
+     rooms’ notification state.
+   • Option ‘ement-interrupted-sync-hook’ allows customization of how
+     sync interruptions are handled.  (Now, by default, a warning is
+     displayed instead of merely a message.)
+
+   *Changes*
+   • When a room’s read receipt is updated, the room’s buffer is also
+     marked as unmodified.  (In concert with the new option, this makes
+     rooms’ unread status more intuitive.)
+
+   *Fixes*
+   • Binding of command ‘ement-forget-room’ in room buffers.
+   • Highlighting of ‘@room’ mentions.
+
+
+File: docKUalik.info,  Node: 031,  Next: 03,  Prev: 04,  Up: Changelog
+
+4.3 0.3.1
+=========
+
+*Fixes*
+   • Room unread status (when the last event in a room is sent by the
+     local user, the room is considered read).
+
+
+File: docKUalik.info,  Node: 03,  Next: 021,  Prev: 031,  Up: Changelog
+
+4.4 0.3
+=======
+
+*Additions*
+   • Command ‘ement-directory’ shows a server’s room directory.
+   • Command ‘ement-directory-search’ searches a server’s room
+     directory.
+   • Command ‘ement-directory-next’ fetches the next batch of rooms in a
+     directory.
+   • Command ‘ement-leave-room’ accepts a ‘FORCE-P’ argument
+     (interactively, with prefix) to leave a room without prompting.
+   • Command ‘ement-forget-room’ accepts a ‘FORCE-P’ argument
+     (interactively, with prefix) to also leave the room, and to forget
+     it without prompting.
+   • Option ‘ement-notify-mark-frame-urgent-predicates’ marks the frame
+     as urgent when (by default) a message mentions the local user or
+     "@room" and the message’s room has an open buffer.
+
+   *Changes*
+   • Minor improvements to date/time headers.
+
+   *Fixes*
+   • Command ‘ement-describe-room’ for rooms without topics.
+   • Improve insertion of old messages around existing timestamp
+     headers.
+   • Reduce D-Bus notification system check timeout to 2 seconds (from
+     the default of 25).
+   • Compatibility with Emacs 27.
+
+
+File: docKUalik.info,  Node: 021,  Next: 02,  Prev: 03,  Up: Changelog
+
+4.5 0.2.1
+=========
+
+*Fixes*
+   • Info manual export filename.
+
+
+File: docKUalik.info,  Node: 02,  Next: 014,  Prev: 021,  Up: Changelog
+
+4.6 0.2
+=======
+
+*Changes*
+   • Read receipts are re-enabled.  (They’re now implemented with a
+     global idle timer rather than ‘window-scroll-functions’, which
+     sometimes caused a strange race condition that could cause Emacs to
+     become unresponsive or crash.)
+   • When determining whether a room is considered unread, non-message
+     events like membership changes, reactions, etc.  are ignored.  This
+     fixes a bug that caused certain rooms that had no message events
+     (like some bridged rooms) to appear as unread when they shouldn’t
+     have.  But it’s unclear whether this is always preferable (e.g.
+     one might want a member leaving a room to cause it to be marked
+     unread), so this is classified as a change rather than simply a
+     fix, and more improvements may be made to this in the future.
+     (Fixes #97 (https://github.com/alphapapa/ement.el/issues/97).
+     Thanks to Julien Roy (https://github.com/MrRoy) for reporting and
+     testing.)
+   • The ‘ement-taxy-room-list’ view no longer automatically refreshes
+     the list if the region is active in the buffer.  (This allows the
+     user to operate on multiple rooms without the contents of the
+     buffer changing before completing the process.)
+
+   *Fixes*
+   • Links to only rooms (as opposed to links to events in rooms) may be
+     activated to join them.
+   • Read receipts mark the last completely visible event (rather than
+     one that’s only partially displayed).
+   • Prevent error when a room avatar image fails to load.
+
+
+File: docKUalik.info,  Node: 014,  Next: 013,  Prev: 02,  Up: Changelog
+
+4.7 0.1.4
+=========
+
+*Fixed*
+   • Info manual directory headers.
+
+
+File: docKUalik.info,  Node: 013,  Next: 012,  Prev: 014,  Up: Changelog
+
+4.8 0.1.3
+=========
+
+*Fixed*
+
+   • Temporarily disable sending of read receipts due to an unusual bug
+     that could cause Emacs to become unresponsive.  (The feature will
+     be re-enabled in a future release.)
+
+
+File: docKUalik.info,  Node: 012,  Next: 011,  Prev: 013,  Up: Changelog
+
+4.9 0.1.2
+=========
+
+*Fixed*
+   • Function ‘ement-room-sync’ correctly updates room-list buffers.
+     (Thanks to Visuwesh (https://github.com/vizs).)
+   • Only send D-Bus notifications when supported.  (Fixes #83
+     (https://github.com/alphapapa/ement.el/issues/83).  Thanks to
+     Tassilo Horn (https://github.com/tsdh).)
+
+
+File: docKUalik.info,  Node: 011,  Next: 01,  Prev: 012,  Up: Changelog
+
+4.10 0.1.1
+==========
+
+*Fixed*
+   • Function ‘ement-room-scroll-up-mark-read’ selects the correct room
+     window.
+   • Option ‘ement-room-list-avatars’ defaults to what function
+     ‘display-images-p’ returns.
+
+
+File: docKUalik.info,  Node: 01,  Prev: 011,  Up: Changelog
+
+4.11 0.1
+========
+
+After almost two years of development, the first tagged release.
+Submitted to GNU ELPA.
+
+
+File: docKUalik.info,  Node: Development,  Next: License,  Prev: Changelog,  Up: Top
+
+5 Development
+*************
+
+Bug reports, feature requests, suggestions — _oh my_!
+
+* Menu:
+
+* Copyright Assignment::
+* Matrix spec in Org format::
+
+
+File: docKUalik.info,  Node: Copyright Assignment,  Next: Matrix spec in Org format,  Up: Development
+
+5.1 Copyright Assignment
+========================
+
+Ement.el is published in GNU ELPA and is considered part of GNU Emacs.
+Therefore, cumulative contributions of more than 15 lines of code
+require that the author assign copyright of such contributions to the
+FSF.  Authors who are interested in doing so may contact assign@gnu.org
+<assign@gnu.org> to request the appropriate form.
+
+
+File: docKUalik.info,  Node: Matrix spec in Org format,  Prev: Copyright Assignment,  Up: Development
+
+5.2 Matrix spec in Org format
+=============================
+
+An Org-formatted version of the Matrix spec is available in the
+meta/spec (https://github.com/alphapapa/ement.el/tree/meta/spec) branch.
+
+
+File: docKUalik.info,  Node: License,  Prev: Development,  Up: Top
+
+6 License
+*********
+
+GPLv3
+
+
+
+Tag Table:
+Node: Top188
+Node: Installation1281
+Node: GNU ELPA1466
+Node: GNU Guix1815
+Node: Debian2020
+Node: Git master2231
+Node: Manual3122
+Node: Usage3418
+Node: Bindings5735
+Node: Room buffers6207
+Node: Room list buffer8403
+Node: Directory buffers8719
+Node: Mentions/notifications buffers8990
+Node: Tips9384
+Node: Displaying symbols and emojis11610
+Node: Encrypted room support through Pantalaimon12237
+Node: Rationale12801
+Node: Changelog16232
+Node: 04116499
+Node: 0416700
+Node: 03118220
+Node: 0318443
+Node: 02119675
+Node: 0219815
+Node: 01421452
+Node: 01321595
+Node: 01221888
+Node: 01122300
+Node: 0122605
+Node: Development22776
+Node: Copyright Assignment23015
+Node: Matrix spec in Org format23501
+Node: License23805
+
+End Tag Table
+
+
+Local Variables:
+coding: utf-8
+End:

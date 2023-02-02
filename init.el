@@ -24,7 +24,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(wheatgrass))
  '(package-selected-packages
-   '(poly-ansible grip-mode use-package markdown-mode ag multiple-cursors dockerfile-mode web-beautify json-mode rainbow-delimiters slime-volleyball flycheck-gometalinter company-go ivy magit projectile go-mode php-mode company-terraform terraform-doc terraform-mode)))
+   '(ement jedi elpy poly-ansible grip-mode use-package markdown-mode ag multiple-cursors dockerfile-mode web-beautify json-mode rainbow-delimiters slime-volleyball flycheck-gometalinter company-go ivy magit projectile go-mode php-mode company-terraform terraform-doc terraform-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -155,3 +155,14 @@
 
 ;;   Setting for ag-projectile
 (global-set-key (kbd "C-c v") 'ag-project)
+
+
+;;   Settings for Elpy
+(use-package elpy
+  :ensure t
+  :defer t
+  :init
+  (advice-add 'python-mode :before 'elpy-enable))
+
+(elpy-enable)  
+(setq elpy-rpc-backend "jedi")

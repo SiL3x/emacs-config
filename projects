@@ -1,0 +1,7 @@
+;;; -*- lisp-data -*-
+(("~/ansible_collections/community/postgresql/")
+ ("~/dev/ansible/")
+ ("~/dev/projects/infrastructure/")
+ ("~/dev/projects/feed-kelkoo/")
+ ("~/dev/projects/feed-shopping24/")
+ ("~/dev/projects/feed-connexity/"))
